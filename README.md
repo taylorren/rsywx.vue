@@ -1,21 +1,15 @@
-# rsywx
+# 任氏有无轩之Vue版
 
-> A Vue.js project
+任氏有无轩之PHP版见这里：[https://rsywx.net](https://rsywx.net)，采用[Symfony](http://symfony.com/)框架完成，也是目前的运行版本。
 
-## Build Setup
+之前完成过任氏有无轩之React版，Github的repo在[这里](https://github.com/taylorren/rsywx.react)，教程见我维客中的[链接](http://rsywx.com/posts/react.html)。
 
-``` bash
-# install dependencies
-npm install
+## 任氏有无轩之Vue版
 
-# serve with hot reload at localhost:8080
-npm run dev
+这是我试图学习一门新的前端JS进行Web编程的尝试。而这次尝试的是[Vue.js](https://vuejs.org/)。
 
-# build for production with minification
-npm run build
+该学习的教程见我维客中的[链接](http://rsywx.com/vue:vue)。
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+[TR@SOE](mailto:taylor.ren@gmail.com)
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+首次提交于：2017.11.19
