@@ -1,7 +1,46 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view/>
+    <footer class="widewrapper footer">
+        <div class="container">
+            <div class="row footer">
+                <div class="col-sm-3">
+                    <h4>About Grove</h4>
+                    <p>Adalah menjadi satu fakta bahawa pembaca akan ter ganggu oleh text yang boleh difa hami apabila meli hi at susunan mukasurat.</p>
+                </div>
+                <div class="col-sm-3">
+                    <div class="indent30">
+                    <h4>Recent News</h4>
+                    <ul class="grove-list">
+                        <li><a href="#">Hello World Shatana</a></li>
+                        <li><a href="#">Foobar in the sky flying so high</a></li>
+                        <li><a href="#">Wild things happening, all around</a></li>
+                        <li><a href="#">No time for that, no time for that</a></li>
+                    </ul>
+                    </div>
+                </div>
+                
+                <div class="col-sm-3">
+                    <h4>About Grove</h4>
+                    <p>Adalah menjadi satu fakta bahawa pembaca akan ter ganggu oleh text yang boleh difa hami apabila meli hi at susunan mukasurat.</p>
+                </div>
+
+                <div class="col-sm-3">
+                    <h4>Connect</h4>
+                    <a href="#" class="social facebook"></a>
+                    <a href="#" class="social twitter"></a>
+                    <a href="#" class="social google_plus"></a>
+                    <a href="#" class="social linked_in"></a>
+                </div>            
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                <p>Designed by <a href="http://hackerthemes.com">HackerThemes</a></p>
+            </div>
+        </div>
+    </footer>
   </div>
 </template>
 
@@ -10,14 +49,3 @@ export default {
   name: 'app'
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
