@@ -1,9 +1,9 @@
 <template>
 <div class="ls-slide" data-ls="transition3d:40;">
-    <img class="ls-bg" src="/grove/img/slides/bg-two.jpg" alt="Slider Background">
-    <img  class="ls-l" :src="coveruri" alt="神们自己" 
+    <img class="ls-bg" src="/img/slides/bg-two.jpg" alt="Slider Background">
+    <img  class="ls-l" :src="coveruri" :alt="book.title" :title="book.title"
       style="top:50px; left:50px;"
-      data-ls=" durationin : 2000; delayin : 0; offsetxin: left;  offsetxout: left;">
+      data-ls=" durationin : 2000; delayin : 0; offsetxin: left;  offsetxout: left;"/>
 
     <div class="ls-l large" style="top:50px;left:700px;white-space: nowrap;" data-ls=" durationin : 2000; delayin : 0; offsetxin: right;  offsetxout: right;" >
         最近读的书
@@ -43,6 +43,7 @@ export default {
   },
   created: function() {
     this.getLatestReading();
+    console.log(this.coveruri);
   },
   methods: {
     getLatestReading() {
@@ -54,7 +55,6 @@ export default {
         .then(json => {
           this.book = json.out.book[0];
           this.review=json.out.review[0];
-          //this.book=book;
         });
     }
   }

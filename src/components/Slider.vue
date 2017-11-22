@@ -6,6 +6,7 @@
         <div id="layerslider" style="width: 100%; height: 405px; margin: 0px auto;">
             <LatestBookSlide/>
             <LatestReadingSlide/>
+            <RandomBookSlide/>
             
              <div class="ls-slide" data-ls="transition2d:5;">
                 <img class="ls-bg" src="img/slides/bg-three.jpg" alt="Slider Background">
@@ -39,13 +40,16 @@
 <script>
 import LatestBookSlide from '@/components/LatestBookSlide';
 import LatestReadingSlide from '@/components/LatestReadingSlide';
+import RandomBookSlide from '@/components/RandomBookSlide';
 
 export default {
   name: "Slider",
   components: {
       LatestBookSlide,
       LatestReadingSlide,
+      RandomBookSlide,
   }
+
 };
 </script>
 
