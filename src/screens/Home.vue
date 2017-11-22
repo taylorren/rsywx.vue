@@ -27,8 +27,6 @@ export default {
     Blog,
     Random,
   },
-  data() {
-  },
   metaInfo: {
     title: "任氏有无轩 | 藏书、读书、博客、维客、资源",
     htmlAttrs: {

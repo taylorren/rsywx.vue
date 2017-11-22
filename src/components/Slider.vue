@@ -4,20 +4,8 @@
     <!-- Note: Layerslider is configured in js/grove-slider.js -->
     <div class="hidden-xs">
         <div id="layerslider" style="width: 100%; height: 405px; margin: 0px auto;">
-            <div class="ls-slide" data-ls="transition2d:5;">
-                <img class="ls-bg" src="img/slides/bg-five.jpg" alt="Slider Background">
-
-                <img  class="ls-l" src="img/slides/imac.png" alt="iMac" 
-                      style="top:15px; left:650px;"
-                      data-ls=" durationin : 2000; delayin : 0; offsetxin: right;  offsetxout: right; ">
-
-                <div class="ls-l large-caption" 
-                     style="top:150px; left:20px;"
-                     data-ls="delayin: 750; offsetxin: 0; offsetxout: 0;">
-                    <div><p>Impress your visitors,</p></div>
-                    <div><p>and turn them into clients!</p></div>
-                </div>
-            </div>
+            <LatestBookSlide/>
+            
 
             <div class="ls-slide" data-ls="transition2d:5;">
                 <img class="ls-bg" src="img/slides/bg-one.jpg" alt="Slider Background">
@@ -66,7 +54,7 @@
     <!-- Layerslider substitute on x-small devices -->
     <div class="widewrapper pagetitle visible-xs">
         <div class="container">
-            <h1>Welcome to Grove!</h1>        
+            <h1>欢迎来到任氏有无轩！</h1>        
         </div>
     </div> 
     </div>
@@ -74,8 +62,13 @@
 </template>
 
 <script>
+import LatestBookSlide from '@/components/LatestBookSlide';
+
 export default {
-  name: "Slider"
+  name: "Slider",
+  components: {
+      LatestBookSlide,
+  }
 };
 </script>
 
