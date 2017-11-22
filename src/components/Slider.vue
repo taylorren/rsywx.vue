@@ -7,22 +7,7 @@
             <LatestBookSlide/>
             <LatestReadingSlide/>
             <RandomBookSlide/>
-            
-             <div class="ls-slide" data-ls="transition2d:5;">
-                <img class="ls-bg" src="img/slides/bg-three.jpg" alt="Slider Background">
-
-                <img  class="ls-l" src="img/slides/macbook-air.png" alt="MB Air" 
-                      style="top:25px; left:50px;"
-                      data-ls="durationin: 2500; offsetxin: left; offsetxout: left;">
-
-                <div class="ls-l large-caption" 
-                     style="top:120px; left:750px;"
-                     data-ls="delayin: 750; offsetxin: 0; offsetxout: 0;">
-                    <div><p>Layerslider:</p></div>
-                    <div><p>Highly configurable,</p></div>
-                    <div><p>flexible and fast</p></div>
-                </div>
-            </div>
+            <ForgottenBookSlide/>
         </div>
     </div>
     
@@ -41,6 +26,7 @@
 import LatestBookSlide from '@/components/LatestBookSlide';
 import LatestReadingSlide from '@/components/LatestReadingSlide';
 import RandomBookSlide from '@/components/RandomBookSlide';
+import ForgottenBookSlide from '@/components/ForgottenBookSlide';
 
 export default {
   name: "Slider",
@@ -48,6 +34,7 @@ export default {
       LatestBookSlide,
       LatestReadingSlide,
       RandomBookSlide,
+      ForgottenBookSlide,
   }
 
 };

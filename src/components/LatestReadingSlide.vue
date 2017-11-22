@@ -1,7 +1,7 @@
 <template>
 <div class="ls-slide" data-ls="transition3d:40;">
     <img class="ls-bg" src="/img/slides/bg-two.jpg" alt="Slider Background">
-    <img  class="ls-l" :src="coveruri" :alt="book.title" :title="book.title"
+    <img  class="ls-l" :src="book.coveruri" :alt="book.title" :title="book.title"
       style="top:50px; left:50px;"
       data-ls=" durationin : 2000; delayin : 0; offsetxin: left;  offsetxout: left;"/>
 
@@ -28,22 +28,13 @@ export default {
       review: []
     };
   },
-  computed: {
+  /*computed: {
     coveruri: function() {
-      return (
-        "http://api.rsywx.com/book/cover/" +
-        this.book.bookid +
-        "/" +
-        this.book.title +
-        "/" +
-        this.book.author +
-        "/300"
-      );
+      return 'http://api.rsywx.com/book/cover/'+this.book.bookid+'/'+this.book.title+'/'+this.book.author+'/300';
     }
-  },
+  },*/
   created: function() {
     this.getLatestReading();
-    console.log(this.coveruri);
   },
   methods: {
     getLatestReading() {
@@ -53,7 +44,11 @@ export default {
           return res.json();
         })
         .then(json => {
-          this.book = json.out.book[0];
+          var book = json.out.book[0];
+          var coveruri='http://api.rsywx.com/book/cover/'+book.bookid+'/'+book.title+'/'+book.author+'/300';
+          book.coveruri=coveruri;
+          
+          this.book=book;
           this.review=json.out.review[0];
         });
     }
