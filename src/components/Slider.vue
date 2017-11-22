@@ -5,33 +5,8 @@
     <div class="hidden-xs">
         <div id="layerslider" style="width: 100%; height: 405px; margin: 0px auto;">
             <LatestBookSlide/>
+            <LatestReadingSlide/>
             
-
-            <div class="ls-slide" data-ls="transition2d:5;">
-                <img class="ls-bg" src="img/slides/bg-one.jpg" alt="Slider Background">
-
-                <img  class="ls-l" src="img/slides/fam_imac.png" alt="iMac" 
-                      style="top:50px; left:50px;"
-                      data-ls=" durationin : 2000; delayin : 0; offsetxin: left;  offsetxout: left;">
-                <img  class="ls-l" src="img/slides/fam_macbook.png" alt="MacBook" 
-                      style="top:190px; left:250px;"
-                      data-ls="durationin : 2000; durationout: 2000; delayin : 300; offsetxin: 300; offsetyin: 300; offsetxout: left;">
-                <img  class="ls-l" src="img/slides/fam_ipad.png" alt="iPad" 
-                      style="top:210px; left:0px;"
-                      data-ls="durationin : 2000; durationout: 2000; delayin : 300; offsetxin: -300; offsetyin: 300; offsetxout: left;">
-                <img  class="ls-l" src="img/slides/fam_iphone.png" alt="iPhone" 
-                      style="top:265px; left:160px;"
-                      data-ls="durationin : 2000; durationout: 2000; delayin : 300; offsetxin: 0; offsetyin: 300; offsetxout: left;">
-
-                <div class="ls-l large-caption" 
-                     style="top:150px; left:700px;"
-                     data-ls="delayin:750; offsetxin: 0; offsetxout: 0;">
-                    <div><p>Create a stunning website</p></div>
-                    <div><p>with Grove. </p></div>
-                </div>
-
-            </div>   
-
              <div class="ls-slide" data-ls="transition2d:5;">
                 <img class="ls-bg" src="img/slides/bg-three.jpg" alt="Slider Background">
 
@@ -63,11 +38,13 @@
 
 <script>
 import LatestBookSlide from '@/components/LatestBookSlide';
+import LatestReadingSlide from '@/components/LatestReadingSlide';
 
 export default {
   name: "Slider",
   components: {
       LatestBookSlide,
+      LatestReadingSlide,
   }
 };
 </script>
