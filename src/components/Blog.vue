@@ -50,7 +50,7 @@ export default {
         .then(json => {
           var blogs=json.out;
           blogs=blogs.slice(1,4);
-          console.log(blogs);
+          
           for(var i in blogs) {
             var blog=blogs[i];
             var pd=new Date(blog.post_date);
