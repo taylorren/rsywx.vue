@@ -9,7 +9,7 @@
           <div class="row">
             <div class="showroom-item blog-item col-sm-4" v-for="blog in blogs" :key="blog.post_title">
               <div class="image">
-                <a :href ="blog.post_title">
+                <a :href ="blog.uri">
                 <img :src="blog.img"  class="img-responsive" :alt="blog.post_title" :title="blog.post_title">
                 </a>
               </div>
