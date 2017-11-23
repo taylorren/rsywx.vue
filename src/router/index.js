@@ -36,7 +36,8 @@ export default new Router({
     {
       path: '/books/:id.html',
       name: 'BookDetail',
-      component: BookDetail
+      component: BookDetail,
+      props: true,
     }
 
   ],
