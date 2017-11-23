@@ -10,7 +10,7 @@
             <div class="showroom-item blog-item col-sm-12">
               <p>历史上的{{String(today.getMonth()+1).padStart(2,'0')}}月{{String(today.getDate()).padStart(2,'0')}}日，任氏有无轩主人购买和/或登录了{{books.length}}本书。它们是：</p>
               <p>
-                <router-link v-for="book in books" :to="{name: 'BookDetail', params: {id: book.bookid} }" :key="book.bookid">{{book.title}}（{{new Date(book.purchdate).getFullYear()}}）</router-link>&nbsp;&nbsp;
+                <router-link v-for="book in books" :to="{name: 'BookDetail', params: {id: book.bookid} }" :key="book.bookid">{{book.title}}（{{new Date().getFullYear()-new Date(book.purchdate).getFullYear()}}年前）</router-link>&nbsp;&nbsp;
               </p>
             </div>
           </div>
