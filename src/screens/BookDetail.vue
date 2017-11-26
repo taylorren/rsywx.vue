@@ -11,7 +11,7 @@
                 <div class="col-sm-6">
                     <h1>{{book.title}}</h1>
                     <p><strong>ISBN：</strong>{{book.isbn}}<br/>
-                        <strong>作者：</strong>{{book.author}}（{{book.region}}）| 译者：陈实<br/>
+                        <strong>作者：</strong>{{book.author}}（{{book.region}}）<span v-if="book.translated=='1'">| 译者：{{book.copyrighter}}</span><br/>
                         <strong>价格：</strong>RMB {{book.price}}<br/>
                         <strong>购于：</strong>{{book.purchdate}}，{{book.plname}}<br/>
                     </p>
@@ -21,10 +21,7 @@
                         </div>
                         <div class="text">
                             <h3>TAG</h3>
-                            <small><a href="/books/list/tag/%E7%BB%8F%E5%85%B8">经典</a>
-<a href="/books/list/tag/%E6%96%87%E5%AD%A6">文学</a>
-<a href="/books/list/tag/%E6%95%A3%E6%96%87">散文</a>
-<a href="/books/list/tag/%E6%84%8F%E5%A4%A7%E5%88%A9">意大利</a>
+                            <small><router-link :to="{name: 'BookList', params: {type: 'tag', key: tag.tag, page:'1'} }" v-for="tag in tags" :key="tag">{{tag.tag}}&nbsp;</router-link>
 </small>
                             <a class="btn btn-info btn-sm" data-toggle="modal" href="#addtag" >增加更多TAG »</a><br/>
                         </div>
@@ -123,7 +120,7 @@
                             </tr>
                             <tr>
                                 <td>藏书位置：</td>
-                                <td>g2</td>
+                                <td>{{book.location}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -143,13 +140,13 @@
                         <h4 class="modal-title">增加自己的TAG</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="/books/addtag"  id='tagform' name='tagform'>
+                        <form method="post" action="http://api.rsywx.com/book/addtags"  id='tagform' name='tagform'>
                             <div class="row">
                                 <div class="col-sm-4 form-group">
                                     <label class="control-label" for="newtags">新增TAG</label>
                                     <input type="text" class="input-xlarge" id="newtags" name="newtags" />
                                     <p class="help-block">（用空格分隔）</p>
-                                    <input type="hidden" value="666" id="id" name="id"/>
+                                    <input type="hidden" :value="book.id" id="id" name="id"/>
 
                                 </div>
                             </div>
@@ -179,6 +176,7 @@ export default {
     return {
       book: [],
       isbn: '',
+      tags: [],
     }
   },
   methods: {
@@ -194,11 +192,24 @@ export default {
           this.isbn=json.out[0].isbn;
           this.book=book;
         });
-
-    }
+    },
+    getTags(id) {
+        var uri='http://api.rsywx.com/book/tagsByBookId/'+id;
+        console.log(uri);
+        fetch(uri)
+            .then(res => {
+                return res.json();
+            })
+            .then(json => {
+                this.tags=json.out;
+            }); 
+    },
   },
   created: function() {
     this.book=this.getBookDetail(this.id);
+    this.tags=this.getTags(this.id);
+    console.log(this.tags);
+
   },
   props: [
     'id',
