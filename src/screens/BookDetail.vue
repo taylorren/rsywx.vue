@@ -10,7 +10,7 @@
 
                 <div class="col-sm-6">
                     <h1>{{book.title}}</h1>
-                    <p><strong>ISBN：</strong>{{book.isbn}}<br/>
+                    <p><strong>ISBN：</strong>{{isbn}}<br/>
                         <strong>作者：</strong>{{book.author}}（{{book.region}}）<span v-if="book.translated=='1'">| 译者：{{book.copyrighter}}</span><br/>
                         <strong>价格：</strong>RMB {{book.price}}<br/>
                         <strong>购于：</strong>{{book.purchdate}}，{{book.plname}}<br/>
@@ -21,7 +21,7 @@
                         </div>
                         <div class="text">
                             <h3>TAG</h3>
-                            <small><router-link :to="{name: 'BookList', params: {type: 'tag', key: tag.tag, page:'1'} }" v-for="tag in tags" :key="tag">{{tag.tag}}&nbsp;</router-link>
+                            <small><router-link :to="{name: 'BookList', params: {type: 'tag', key: tag.tag, page:'1'} }" v-for="tag in tags" :key="tag">{{tag.tag}}&nbsp;&nbsp;</router-link>
 </small>
                             <a class="btn btn-info btn-sm" data-toggle="modal" href="#addtag" >增加更多TAG »</a><br/>
                         </div>
@@ -32,15 +32,7 @@
                         </div>
                         <div class="text">
                             <h3>豆瓣TAG</h3>
-                            <small>卡尔维诺
-隐形的城市
-意大利文学
-意大利
-小说
-外国文学
-看不见的城市
-经典
-</small>
+                            <small v-for="dtag in douban_tags" :key='dtag.tag'>{{dtag}}&nbsp;&nbsp;</small>
                         </div>
                     </div>
                     <div class="feature">
@@ -49,7 +41,7 @@
                         </div>
                         <div class="text">
                             <h3>豆瓣评分</h3>
-                            <small>9.0</small>
+                            <small>{{douban.rating}}</small>
                         </div>
                     </div>
                     <div class="feature">
@@ -72,11 +64,9 @@
     </table>
 
                     <h3>豆瓣简介：</h3>
-                    <p>（豆瓣还没有简介）</p>
-                    <p>更多信息参见：<a href="https://book.douban.com/subject/2969648/">豆瓣链接</a>。</p>
+                    <p>{{douban.summary}}</p>
+                    <p>更多信息参见：<a :href="douban.alternate">豆瓣链接</a>。</p>
                     <h3>更多书籍信息</h3>
-
-
                     <table class="table table-hover table-striped">
 
                         <tbody>
@@ -174,17 +164,21 @@ export default {
       tags: [],
       vc: 0,
       lv: "",
+      douban:[],
+      douban_tags: [],
+      reviews: [],
     }
   },
   methods: {
     getBookDetail(id) {
       var uri='http://api.rsywx.com/book/bookByBookId/'+id;
+      var book;
       fetch(uri)
         .then(res => {
           return res.json();
         })
         .then(json => {
-          var book=json.out[0];
+          book=json.out[0];
           book.cover="http://api.rsywx.com/book/cover/"+book.bookid+"/"+book.title+"/"+book.author+"/300";
           this.isbn=json.out[0].isbn;
           this.book=book;
@@ -192,7 +186,6 @@ export default {
     },
     getTags(id) {
         var uri='http://api.rsywx.com/book/tagsByBookId/'+id;
-        console.log(uri);
         fetch(uri)
             .then(res => {
                 return res.json();
@@ -220,15 +213,47 @@ export default {
             .then(json =>{
                 this.lv=json.out;
             })
-        console.log(this.visit);
+        
+    },
+    getDouban(id) {
+        var uri="http://api.rsywx.com/douban/douban/" + id;
+        fetch(uri)
+            .then(res => {
+                return res.json();
+            })
+            .then(json => {
+                this.douban=json.out;
+                this.douban_tags=json.out.tags;
+            })
+    },
+    getReview(id) {
+        var uri="http://api.rsywx.com/reading/relatedReview/" + id;
+        fetch(uri)
+            .then(res => {
+                return res.json();
+            })
+            .then(json => {
+                this.reviews=json.out;
+            })
     }
   },
   created: function() {
-    this.book=this.getBookDetail(this.id);
-    this.tags=this.getTags(this.id);
-    this.visit=this.getVisitInfo(this.id);
-    console.log(this.tags);
-
+    this.getBookDetail(this.id);
+    this.getTags(this.id);
+    this.getVisitInfo(this.id);
+  },
+  watch:{
+      cloneISBN: function(newV, oldV) {
+          if(newV!=oldV) {
+              this.getDouban(this.cloneISBN);
+          }
+      }
+  },
+  computed: 
+  {
+      cloneISBN: function() {
+          return this.isbn;
+      }
   },
   props: [
     'id',
