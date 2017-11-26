@@ -58,7 +58,7 @@
                         </div>
                         <div class="text">
                             <h3>浏览次数</h3>
-                            <small><strong>2387</strong>（上次访问时间是2017-11-19 14:10:50）</small>
+                            <small><strong>{{vc}}</strong>（上次访问时间是{{lv}}）</small>
                         </div>
                     </div>
                 </div>
@@ -66,13 +66,7 @@
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <h3>简介：</h3>
-                    <p>这是我买的第一本卡尔维诺的书。此后就一发不可收拾。
-
-曾经重复读过N多次，还做了若干主页向大家推荐（早在98、99年）。现在吗，看卡尔维诺已经很时髦了。
-
-别忘了，这本书初版只有1870册的印数！
-
-意大利文书名为：Le cittá invisibili</p>                    
+                    <p>{{book.intro}}</p>                    
                     <h3>任氏有无轩主人评论：</h3>
                     <table class="table table-hover table-striped">
     </table>
@@ -88,35 +82,35 @@
                         <tbody>
                             <tr>
                                 <td>出版社：</td>
-                                <td>花城出版社</td>
+                                <td>{{book.pname}}</td>
                             </tr>
                             <tr>
                                 <td>出版日期：</td>
-                                <td>1991/01/01</td>
+                                <td>{{book.pubdate}}</td>
                             </tr>
                             <tr>
                                 <td>印刷日期：</td>
-                                <td>1991/01/01</td>
+                                <td>{{book.printdate}}</td>
                             </tr>
                             <tr>
                                 <td>版次：</td>
-                                <td>1.1</td>
+                                <td>{{book.ver}}</td>
                             </tr>
                             <tr>
                                 <td>装帧：</td>
-                                <td>普通</td>
+                                <td>{{book.deco}}</td>
                             </tr>
                             <tr>
                                 <td>千字数：</td>
-                                <td>60</td>
+                                <td>{{book.kword}}</td>
                             </tr>
                             <tr>
                                 <td>页数：</td>
-                                <td>149</td>
+                                <td>{{book.page}}</td>
                             </tr>
                             <tr>
                                 <td>分类号：</td>
-                                <td>I.696   </td>
+                                <td>{{book.category}}</td>
                             </tr>
                             <tr>
                                 <td>藏书位置：</td>
@@ -147,6 +141,7 @@
                                     <input type="text" class="input-xlarge" id="newtags" name="newtags" />
                                     <p class="help-block">（用空格分隔）</p>
                                     <input type="hidden" :value="book.id" id="id" name="id"/>
+                                    <input type="hidden" :value="book.bookid" id="bookid" name="bookid" />
 
                                 </div>
                             </div>
@@ -177,6 +172,8 @@ export default {
       book: [],
       isbn: '',
       tags: [],
+      vc: 0,
+      lv: "",
     }
   },
   methods: {
@@ -204,10 +201,32 @@ export default {
                 this.tags=json.out;
             }); 
     },
+    getVisitInfo(id) {
+        var uri1="http://api.rsywx.com/book/visitCount/" + id+', 1';
+        
+        fetch(uri1)
+            .then(res => {
+                return res.json();
+            })
+            .then(json => {
+                this.vc=json.out;
+            })
+
+        var uri2="http://api.rsywx.com/book/lastVisit/" + id;
+        fetch(uri2)
+            .then(res => {
+                return res.json();
+            })
+            .then(json =>{
+                this.lv=json.out;
+            })
+        console.log(this.visit);
+    }
   },
   created: function() {
     this.book=this.getBookDetail(this.id);
     this.tags=this.getTags(this.id);
+    this.visit=this.getVisitInfo(this.id);
     console.log(this.tags);
 
   },
