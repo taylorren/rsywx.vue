@@ -61,7 +61,12 @@
                     <p>{{book.intro}}</p>                    
                     <h3>任氏有无轩主人评论：</h3>
                     <table class="table table-hover table-striped">
-    </table>
+                        <tbody>
+                            <tr v-for="review in reviews" :key="review.id">
+                                <td><a :href="review.URI">{{review.title}}</a>，发表于{{review.datein}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
                     <h3>豆瓣简介：</h3>
                     <p>{{douban.summary}}</p>
@@ -241,20 +246,21 @@ export default {
     this.getBookDetail(this.id);
     this.getTags(this.id);
     this.getVisitInfo(this.id);
+    this.getReview(this.id);
   },
   watch:{
-      cloneISBN: function(newV, oldV) {
+      isbn: function(newV, oldV) {
           if(newV!=oldV) {
-              this.getDouban(this.cloneISBN);
+              this.getDouban(this.isbn);
           }
       }
   },
-  computed: 
+  /*computed: 
   {
       cloneISBN: function() {
           return this.isbn;
       }
-  },
+  },*/
   props: [
     'id',
   ]
