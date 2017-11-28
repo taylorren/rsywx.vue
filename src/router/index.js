@@ -19,9 +19,10 @@ export default new Router({
       component: Home
     },
     {
-      path:'/books/list/:type/:key/:page',
+      path:'/books/list/:search/:keyword/:page',
       name: 'BookList',
-      component: BookList
+      component: BookList,
+      props: true
     },
     {
       path: '/books/readings/:page',
