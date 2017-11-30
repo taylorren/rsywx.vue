@@ -81,12 +81,13 @@ export default {
   ],
   created: function() {
     this.getBooks(this.search, this.keyword, this.page);
-    console.log(this.books);
+    console.log(this.page);
+
   },
   methods: {
     getBooks(search, keyword, page) {
       var uri="http://api.rsywx.com/books/list/"+search+"/"+keyword+"/"+page;
-      console.log(uri);
+      
       fetch(uri)
         .then(res => {
           return res.json();
