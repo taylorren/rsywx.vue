@@ -5,22 +5,22 @@
         <div class="container content">
             <div class="row">
                 <section id="searchform" class="col-md-6">
-                    <form action="/books/search" method="post" accept-charset="utf-8" class="form-inline">
+                    <form accept-charset="utf-8" class="form-inline">
                         <div class="row">
                             <div class="col-sm-6 form-group">
-                                <input class="form-control input-sm" type="text" id="key" name="key" placeholder="all">
-                                <button type="submit" class="btn btn-grove-one btn-sm btn-bold">搜索</button>
+                                <input class="form-control input-sm" type="text" id="key" name="key" placeholder="all" v-model="searchfor">
+                                <button type="submit" class="btn btn-grove-one btn-sm btn-bold" @click="searchPage">搜索</button>
                             </div>
                         </div>
                     </form>
                 </section>
                 <section id="gotoform" class="col-md-6">
-                    <form action="/books/gotopage" method="post" accept-charset="utf-8" class="clearfix">
+                    <form accept-charset="utf-8" class="clearfix">
                         <div class="row">
                             <div class="col-sm-6 form-group">
-                                <input class="form-control input-sm" type="text" id="page" name="page" placeholder="直接去第几页">
+                                <input class="form-control input-sm" type="text" id="page" name="page" placeholder="直接去第几页" v-model="gotopage">
                                 <input type="hidden" name="current" id="current" value="1"/>
-                                <button type="submit" class="btn btn-grove-one btn-sm btn-bold">直接去</button>
+                                <button type="submit" class="btn btn-grove-one btn-sm btn-bold" @click="gotoPage">直接去</button>
                             </div>
                         </div>
                     </form>
@@ -66,6 +66,8 @@ export default {
     return {
       pages: -1,
       books: [],
+      searchfor: 'all',
+      gotopage: ''
     }
 
   },
@@ -81,8 +83,6 @@ export default {
   ],
   created: function() {
     this.getBooks(this.search, this.keyword, this.page);
-    console.log(this.page);
-
   },
   methods: {
     getBooks(search, keyword, page) {
@@ -97,6 +97,15 @@ export default {
           this.pages=Math.ceil(parseInt(out.count.bc)/20);
           this.books=out.books;
         })
+    },
+    searchPage(e) {
+        window.location="/books/list/title/"+this.searchfor+"/1";
+        e.preventDefault();
+        
+    },
+    gotoPage(e) {
+        window.location="/books/list/"+this.search+"/"+this.searchfor+"/"+this.gotopage;
+        e.preventDefault();
     }
   },
 };

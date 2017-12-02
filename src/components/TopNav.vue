@@ -13,16 +13,16 @@
                             <a href="/">首页</a>
                         </li>                          
                         <li v-bind:class="{ active: active==2 }">
-                            <router-link :to="{name: 'BookList', params: {type: 'title', 'key':'all', 'page': 1}}">藏书</router-link>
+                            <a href="/books/list/title/all/1">藏书</a>
                         </li>
                         <li v-bind:class="{ active: active==3 }">
-                            <router-link :to="{name: 'ReadingList', params: {'page': 1}}">读书</router-link>
+                            <a href="/books/readings/1">读书</a>
                         </li>
                         <li>
                             <a href="https://rsywx.net/wordpress">博客</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" data-toggle="dropdown">维客 <b class="caret"></b></a>
+                            <a href="http://www.rsywx.com" data-toggle="dropdown">维客 <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="http://www.rsywx.com">维客首页</a></li>
                                 <li><a href="http://www.rsywx.com/911:911">911调查委员会报告</a></li>
