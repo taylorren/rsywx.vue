@@ -66,7 +66,7 @@ export default {
   ],
   created: function() {
     var uri = "http://api.rsywx.com/reading/listHeadline/" + this.page;
-    console.log(uri);
+    
     fetch(uri)
       .then(res => {
         return res.json();
