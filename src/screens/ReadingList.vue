@@ -24,47 +24,16 @@
                   <td rowspan="2"><img :src="headline.book.cover" :alt="headline.book.title + ' '+headline.book.author" :title="headline.book.title + ' '+headline.book.author"/></td>
                   <td><router-link :to="{name: 'BookDetail', params: {id: headline.book.bookid} }">{{headline.book.title}}</router-link></td>
                   <td>{{headline.book.author}}</td>
-                  <td><a href="/books/list/tag/%E9%87%91%E8%9E%8D">金融</a> <a href="/books/list/tag/%E5%8D%8E%E5%B0%94%E8%A1%97">华尔街</a><a href="/books/list/tag/%E5%86%85%E5%B9%95">内幕</a></td>
-                  <td>{{headline.book.location}}</td>
+                  <td><Tags :bookid="headline.book.bookid"/></td>
                 </tr>
-                <tr :key="headline.bid">
-                  <td colspan="4">
-                    <table class="table table-striped table-hover">
-                      <tr>
-                        <th class="col-md-1"><strong>评论编号</strong></th>
-                        <th class="col-md-9"><strong>评论标题</strong></th>
-                        <th class="col-md-2 "><strong>评论日期</strong></th>
-                      </tr>
-                      <tr>
-                        <td>121</td>
-                        <td><a href="https://rsywx.net/wordpress/2016/08/26/unbearable-defects-folding-beijing/">《北京折叠》的硬伤到底在哪里？</a></td>
-                        <td>2016/08/26</td>
-                      </tr>
-                      <tr>
-                        <td>109</td>
-                        <td><a href="https://rsywx.net/wordpress/2017/05/04/entanglement-in-dune/">《沙丘》中的意念缠绕</a></td>
-                        <td>2017/05/04</td>
-                      </tr>
-                      <tr>
-                        <td>122</td>
-                        <td><a href="https://rsywx.net/wordpress/2017/11/05/dune-messiah/">沙丘救世主</a></td>
-                        <td>2017/11/05</td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
+                <ReviewList :bookid="headline.book.bookid" :key="headline.hid"/>
               </template>
             </tbody>
           </table>
         </div>
       </div>
       <div class="row">
-        <section id="pagination" class="col-md-12">
-          <a href="/books/readings" title="首页"><i class="glyphicons fast_backward"></i></a>
-          <a class="disabled" title="上一页"><i class="glyphicons rewind"></i></a>
-          <a href="/books/readings/2" title="下一页"><i class="glyphicons forward"></i></a>
-          <a href="/books/readings/20" title="末页"><i class="glyphicons fast_forward"></i></a>
-        </section>
+        <ReadingPaginator :page="page" :pages="pages"/>
       </div>
     </div>
   </div>
@@ -73,16 +42,23 @@
 
 <script>
 import TopNav from "@/components/TopNav";
+import ReviewList from "@/components/ReviewList";
+import Tags from "@/components/Tags";
+import ReadingPaginator from "@/components/ReadingPaginator";
 
 export default {
   name: "BookList",
   components: {
     TopNav,
+    ReviewList,
+    Tags,
+    ReadingPaginator,
   },
   data: function() {
     return {
       headlines: [],
-      count: 0
+      count: 0,
+      pages: -1,
     };
   },
   props: [
@@ -98,6 +74,7 @@ export default {
       .then(json => {
         var headlines= json.out[0];
         this.count = json.out[1];
+        this.pages=Math.ceil(this.count/5);
 
         for(var h in headlines) {
           
