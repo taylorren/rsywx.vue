@@ -21,7 +21,7 @@
                         </div>
                         <div class="text">
                             <h3>TAG</h3>
-                            <small><router-link :to="{name: 'BookList', params: {type: 'tag', key: tag.tag, page:'1'} }" v-for="tag in tags" :key="tag">{{tag.tag}}&nbsp;&nbsp;</router-link>
+                            <small><router-link :to="{name: 'BookList', params: {search: 'tag', keyword: tag.tag, page:'1'} }" v-for="tag in tags" :key="tag">{{tag.tag}}&nbsp;&nbsp;</router-link>
 </small>
                             <a class="btn btn-info btn-sm" data-toggle="modal" href="#addtag" >增加更多TAG »</a><br/>
                         </div>

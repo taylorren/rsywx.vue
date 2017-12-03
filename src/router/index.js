@@ -27,7 +27,8 @@ export default new Router({
     {
       path: '/books/readings/:page',
       name: 'ReadingList',
-      component: ReadingList
+      component: ReadingList,
+      props: true,
     },
     {
       path: '/contact',
@@ -35,7 +36,7 @@ export default new Router({
       component: Contact
     },
     {
-      path: '/books/:id',
+      path: '/books/:id.html',
       name: 'BookDetail',
       component: BookDetail,
       props: true,
